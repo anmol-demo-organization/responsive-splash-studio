@@ -1,4 +1,5 @@
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -15,12 +16,14 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
-            <h1 className="text-2xl font-bold">BoxCraftPro</h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold cursor-pointer hover:text-primary transition-colors">BoxCraftPro</h1>
+            </Link>
             
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Home</a>
-              <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Contact</a>
+              <Link to="/" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Home</Link>
+              <Link to="/contact" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Contact</Link>
               <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">About</a>
               <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Sign Up</a>
             </nav>
