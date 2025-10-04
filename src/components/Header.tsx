@@ -1,9 +1,13 @@
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const Header = () => {
+  const location = useLocation();
+  
+  const isActive = (path: string) => location.pathname === path;
+  
   return (
     <>
       {/* Top banner */}
@@ -22,8 +26,22 @@ const Header = () => {
             
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Home</Link>
-              <Link to="/contact" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Contact</Link>
+              <Link 
+                to="/" 
+                className={`hover:text-primary transition-colors border-b-2 pb-1 ${
+                  isActive('/') ? 'border-primary text-primary' : 'border-transparent'
+                }`}
+              >
+                Home
+              </Link>
+              <Link 
+                to="/contact" 
+                className={`hover:text-primary transition-colors border-b-2 pb-1 ${
+                  isActive('/contact') ? 'border-primary text-primary' : 'border-transparent'
+                }`}
+              >
+                Contact
+              </Link>
               <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">About</a>
               <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Sign Up</a>
             </nav>

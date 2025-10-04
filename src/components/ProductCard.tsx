@@ -1,6 +1,8 @@
 import { Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
+  id: number;
   name: string;
   price: number;
   originalPrice?: number;
@@ -10,6 +12,7 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ 
+  id,
   name, 
   price, 
   originalPrice, 
@@ -18,7 +21,7 @@ const ProductCard = ({
   image 
 }: ProductCardProps) => {
   return (
-    <div className="group cursor-pointer">
+    <Link to={`/product/${id}`} className="group cursor-pointer block">
       <div className="aspect-square bg-secondary rounded-lg mb-4 overflow-hidden relative">
         {image ? (
           <img src={image} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -58,7 +61,7 @@ const ProductCard = ({
         </div>
         <span className="text-sm text-muted-foreground">({reviewCount})</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
