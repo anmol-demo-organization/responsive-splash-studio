@@ -1,43 +1,35 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Heart, Minus, Plus, Truck, RotateCcw } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { getProductById, getAllProducts } from "@/pages/Home/constants";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { toast } = useToast();
+  
+  // Get product by ID
+  const product = getProductById(Number(id));
+  
+  // If product not found, redirect to home
+  if (!product) {
+    return <Navigate to="/" replace />;
+  }
+
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState("blue");
-  const [selectedSize, setSelectedSize] = useState("M");
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.name || "");
+  const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || "");
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // Mock product data - in a real app, fetch based on id
-  const product = {
-    id: Number(id),
-    name: "Havic HV G-92 Gamepad",
-    price: 192,
-    originalPrice: 0,
-    rating: 4,
-    reviewCount: 150,
-    inStock: true,
-    description: "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
-    colors: [
-      { name: "blue", class: "bg-primary" },
-      { name: "red", class: "bg-red-500" },
-    ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-  };
-
-  const relatedProducts = [
-    { id: 1, name: "HAVIT HV-G92 Gamepad", price: 120, originalPrice: 160, rating: 5, reviewCount: 88 },
-    { id: 2, name: "AK-900 Wired Keyboard", price: 960, originalPrice: 1160, rating: 4, reviewCount: 75 },
-    { id: 3, name: "IPS LCD Gaming Monitor", price: 370, originalPrice: 400, rating: 5, reviewCount: 99 },
-    { id: 4, name: "RGB Liquid CPU Cooler", price: 160, originalPrice: 170, rating: 4.5, reviewCount: 65 },
-  ];
+  // Get related products (random products excluding current one)
+  const allProducts = getAllProducts();
+  const relatedProducts = allProducts
+    .filter(p => p.id !== product.id)
+    .slice(0, 4);
 
   const handleAddToCart = () => {
     toast({
@@ -75,12 +67,22 @@ const ProductDetails = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Product Images */}
             <div className="space-y-4">
-              <div className="aspect-square bg-secondary rounded-lg flex items-center justify-center">
-                <span className="text-muted-foreground text-lg">Product Image</span>
+              <div className="aspect-square bg-secondary rounded-lg flex items-center justify-center overflow-hidden">
+                {product.image ? (
+                  <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                ) : (
+                  <span className="text-muted-foreground text-lg">Product Image</span>
+                )}
               </div>
               <div className="grid grid-cols-4 gap-4">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="aspect-square bg-secondary rounded-lg cursor-pointer hover:ring-2 hover:ring-primary transition-all" />
+                  <div key={i} className="aspect-square bg-secondary rounded-lg cursor-pointer hover:ring-2 hover:ring-primary transition-all overflow-hidden flex items-center justify-center">
+                    {product.image ? (
+                      <img src={product.image} alt={`${product.name} ${i}`} className="w-full h-full object-contain" />
+                    ) : (
+                      <span className="text-muted-foreground text-xs">{i}</span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -104,51 +106,64 @@ const ProductDetails = () => {
                     <span className="text-sm text-muted-foreground">({product.reviewCount} Reviews)</span>
                   </div>
                   <span className="text-sm">|</span>
-                  <span className="text-sm text-green-500">In Stock</span>
+                  <span className={`text-sm ${product.inStock ? "text-green-500" : "text-red-500"}`}>
+                    {product.inStock ? "In Stock" : "Out of Stock"}
+                  </span>
                 </div>
-                <p className="text-3xl font-semibold text-price mb-4">${product.price.toFixed(2)}</p>
-                <p className="text-muted-foreground pb-6 border-b">{product.description}</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <p className="text-3xl font-semibold">${product.price.toFixed(2)}</p>
+                  {product.originalPrice && (
+                    <p className="text-xl text-muted-foreground line-through">${product.originalPrice.toFixed(2)}</p>
+                  )}
+                </div>
+                <p className="text-muted-foreground pb-6 border-b">
+                  {product.description || "No description available for this product."}
+                </p>
               </div>
 
               {/* Colors */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="font-medium">Colours:</span>
-                  <div className="flex gap-2">
-                    {product.colors.map((color) => (
-                      <button
-                        key={color.name}
-                        onClick={() => setSelectedColor(color.name)}
-                        className={`w-8 h-8 rounded-full ${color.class} ${
-                          selectedColor === color.name ? "ring-2 ring-foreground ring-offset-2" : ""
-                        }`}
-                      />
-                    ))}
+              {product.colors && product.colors.length > 0 && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Colours:</span>
+                    <div className="flex gap-2">
+                      {product.colors.map((color) => (
+                        <button
+                          key={color.name}
+                          onClick={() => setSelectedColor(color.name)}
+                          className={`w-8 h-8 rounded-full ${color.class} ${
+                            selectedColor === color.name ? "ring-2 ring-foreground ring-offset-2" : ""
+                          }`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Sizes */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="font-medium">Size:</span>
-                  <div className="flex gap-2">
-                    {product.sizes.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`px-4 py-2 border rounded ${
-                          selectedSize === size
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : "border-input hover:border-primary transition-colors"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
+              {product.sizes && product.sizes.length > 0 && (
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-medium">Size:</span>
+                    <div className="flex gap-2">
+                      {product.sizes.map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-4 py-2 border rounded ${
+                            selectedSize === size
+                              ? "bg-primary text-primary-foreground border-primary"
+                              : "border-input hover:border-primary transition-colors"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Quantity & Actions */}
               <div className="flex flex-wrap items-center gap-4">
