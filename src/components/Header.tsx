@@ -2,9 +2,12 @@ import { Search, ShoppingCart, User, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useState } from "react";
 
 const Header = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   
   const isActive = (path: string) => location.pathname === path;
   
@@ -68,9 +71,49 @@ const Header = () => {
                 </span>
               </Button>
               
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-              </Button>
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="md:hidden">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px]">
+                  <nav className="flex flex-col space-y-4 mt-8">
+                    <Link 
+                      to="/" 
+                      onClick={() => setIsOpen(false)}
+                      className={`text-lg hover:text-primary transition-colors ${
+                        isActive('/') ? 'text-primary font-semibold' : ''
+                      }`}
+                    >
+                      Home
+                    </Link>
+                    <Link 
+                      to="/contact" 
+                      onClick={() => setIsOpen(false)}
+                      className={`text-lg hover:text-primary transition-colors ${
+                        isActive('/contact') ? 'text-primary font-semibold' : ''
+                      }`}
+                    >
+                      Contact
+                    </Link>
+                    <a 
+                      href="#" 
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg hover:text-primary transition-colors"
+                    >
+                      About
+                    </a>
+                    <a 
+                      href="#" 
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg hover:text-primary transition-colors"
+                    >
+                      Sign Up
+                    </a>
+                  </nav>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
