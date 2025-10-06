@@ -17,6 +17,21 @@ import kidsCarImg from "@/assets/products/kids-car.jpg";
 import soccerCleatsImg from "@/assets/products/soccer-cleats.jpg";
 import usbGamepadImg from "@/assets/products/usb-gamepad.jpg";
 import jacketImg from "@/assets/products/jacket.jpg";
+import mouseImg from "@/assets/products/mouse.jpg";
+import headphonesImg from "@/assets/products/headphones.jpg";
+import smartphoneImg from "@/assets/products/smartphone.jpg";
+import tabletImg from "@/assets/products/tablet.jpg";
+import smartwatchImg from "@/assets/products/smartwatch.jpg";
+import deskLampImg from "@/assets/products/desk-lamp.jpg";
+import runningShoesImg from "@/assets/products/running-shoes.jpg";
+import backpackImg from "@/assets/products/backpack.jpg";
+import toothbrushImg from "@/assets/products/toothbrush.jpg";
+import coffeeMakerImg from "@/assets/products/coffee-maker.jpg";
+import speakerImg from "@/assets/products/speaker.jpg";
+import earbudsImg from "@/assets/products/earbuds.jpg";
+import hoodieImg from "@/assets/products/hoodie.jpg";
+import sunglassesImg from "@/assets/products/sunglasses.jpg";
+import waterBottleImg from "@/assets/products/water-bottle.jpg";
 
 export interface Product {
   id: number;
@@ -108,6 +123,67 @@ export const flashSalesProducts: Product[] = [
     description: "High-performance liquid cooling system with RGB lighting. Keeps your CPU running cool under heavy loads.",
     inStock: true,
   },
+  { 
+    id: 18, 
+    name: "Wireless RGB Gaming Mouse", 
+    price: 89, 
+    originalPrice: 120, 
+    rating: 4.8, 
+    reviewCount: 156,
+    image: mouseImg,
+    description: "High-precision wireless gaming mouse with customizable RGB lighting and programmable buttons.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "white", class: "bg-gray-100" },
+    ],
+  },
+  { 
+    id: 19, 
+    name: "Premium Wireless Headphones", 
+    price: 299, 
+    originalPrice: 399, 
+    rating: 4.9, 
+    reviewCount: 89,
+    image: headphonesImg,
+    description: "Noise-cancelling wireless headphones with premium sound quality and 30-hour battery life.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "blue", class: "bg-blue-500" },
+    ],
+  },
+  { 
+    id: 20, 
+    name: "Latest Smartphone Pro", 
+    price: 999, 
+    originalPrice: 1199, 
+    rating: 4.7, 
+    reviewCount: 234,
+    image: smartphoneImg,
+    description: "Latest flagship smartphone with triple camera system and 5G connectivity.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "blue", class: "bg-blue-500" },
+      { name: "gold", class: "bg-yellow-500" },
+    ],
+  },
+  { 
+    id: 21, 
+    name: "Professional Tablet", 
+    price: 649, 
+    originalPrice: 799, 
+    rating: 4.6, 
+    reviewCount: 167,
+    image: tabletImg,
+    description: "Professional tablet with stylus support, perfect for digital art and productivity.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "silver", class: "bg-gray-400" },
+    ],
+  },
 ];
 
 export const bestSellingProducts: Product[] = [
@@ -166,6 +242,48 @@ export const bestSellingProducts: Product[] = [
       { name: "wood", class: "bg-amber-600" },
       { name: "white", class: "bg-gray-100" },
     ],
+  },
+  { 
+    id: 22, 
+    name: "Fitness Smartwatch", 
+    price: 249, 
+    originalPrice: 349, 
+    rating: 4.5, 
+    reviewCount: 198,
+    image: smartwatchImg,
+    description: "Advanced fitness smartwatch with heart rate monitoring and GPS tracking.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "white", class: "bg-gray-100" },
+      { name: "rose", class: "bg-pink-400" },
+    ],
+  },
+  { 
+    id: 23, 
+    name: "LED Desk Lamp", 
+    price: 89, 
+    originalPrice: 129, 
+    rating: 4.4, 
+    reviewCount: 112,
+    image: deskLampImg,
+    description: "Adjustable LED desk lamp with touch controls and multiple brightness levels.",
+    inStock: true,
+    colors: [
+      { name: "silver", class: "bg-gray-400" },
+      { name: "black", class: "bg-gray-900" },
+    ],
+  },
+  { 
+    id: 24, 
+    name: "Professional Coffee Maker", 
+    price: 599, 
+    originalPrice: 699, 
+    rating: 4.8, 
+    reviewCount: 145,
+    image: coffeeMakerImg,
+    description: "Professional-grade espresso machine with built-in grinder and milk frother.",
+    inStock: true,
   },
 ];
 
@@ -266,6 +384,130 @@ export const exploreProducts: Product[] = [
       { name: "black", class: "bg-gray-900" },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
+  },
+  { 
+    id: 25, 
+    name: "Premium Running Shoes", 
+    price: 189, 
+    originalPrice: 249, 
+    rating: 4.7, 
+    reviewCount: 298,
+    image: runningShoesImg,
+    description: "High-performance running shoes with advanced cushioning and breathable mesh upper.",
+    inStock: true,
+    colors: [
+      { name: "neon", class: "bg-green-400" },
+      { name: "blue", class: "bg-blue-500" },
+    ],
+    sizes: ["7", "8", "9", "10", "11", "12"],
+  },
+  { 
+    id: 26, 
+    name: "Travel Backpack Pro", 
+    price: 149, 
+    originalPrice: 199, 
+    rating: 4.6, 
+    reviewCount: 187,
+    image: backpackImg,
+    description: "Durable travel backpack with multiple compartments and laptop sleeve.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "gray", class: "bg-gray-600" },
+    ],
+  },
+  { 
+    id: 27, 
+    name: "Electric Toothbrush", 
+    price: 129, 
+    originalPrice: 179, 
+    rating: 4.5, 
+    reviewCount: 156,
+    image: toothbrushImg,
+    description: "Smart electric toothbrush with app connectivity and multiple cleaning modes.",
+    inStock: true,
+    colors: [
+      { name: "white", class: "bg-gray-100" },
+      { name: "blue", class: "bg-blue-500" },
+    ],
+  },
+  { 
+    id: 28, 
+    name: "Bluetooth Speaker", 
+    price: 79, 
+    originalPrice: 119, 
+    rating: 4.3, 
+    reviewCount: 234,
+    image: speakerImg,
+    description: "Portable Bluetooth speaker with 360-degree sound and waterproof design.",
+    inStock: true,
+    colors: [
+      { name: "black", class: "bg-gray-900" },
+      { name: "blue", class: "bg-blue-500" },
+    ],
+  },
+  { 
+    id: 29, 
+    name: "Wireless Earbuds Pro", 
+    price: 199, 
+    originalPrice: 249, 
+    rating: 4.8, 
+    reviewCount: 345,
+    image: earbudsImg,
+    description: "True wireless earbuds with active noise cancellation and premium sound quality.",
+    inStock: true,
+    colors: [
+      { name: "white", class: "bg-gray-100" },
+      { name: "black", class: "bg-gray-900" },
+    ],
+  },
+  { 
+    id: 30, 
+    name: "Comfort Hoodie", 
+    price: 89, 
+    originalPrice: 129, 
+    rating: 4.4, 
+    reviewCount: 123,
+    image: hoodieImg,
+    description: "Ultra-soft cotton hoodie with premium comfort fit and modern design.",
+    inStock: true,
+    colors: [
+      { name: "gray", class: "bg-gray-500" },
+      { name: "black", class: "bg-gray-900" },
+      { name: "white", class: "bg-gray-100" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+  },
+  { 
+    id: 31, 
+    name: "Designer Sunglasses", 
+    price: 149, 
+    originalPrice: 219, 
+    rating: 4.6, 
+    reviewCount: 89,
+    image: sunglassesImg,
+    description: "Premium designer sunglasses with UV protection and polarized lenses.",
+    inStock: true,
+    colors: [
+      { name: "gold", class: "bg-yellow-500" },
+      { name: "silver", class: "bg-gray-400" },
+    ],
+  },
+  { 
+    id: 32, 
+    name: "Insulated Water Bottle", 
+    price: 39, 
+    originalPrice: 59, 
+    rating: 4.7, 
+    reviewCount: 267,
+    image: waterBottleImg,
+    description: "Double-wall insulated water bottle that keeps drinks hot or cold for hours.",
+    inStock: true,
+    colors: [
+      { name: "steel", class: "bg-gray-500" },
+      { name: "black", class: "bg-gray-900" },
+      { name: "blue", class: "bg-blue-500" },
+    ],
   },
 ];
 
