@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -28,12 +28,37 @@ interface ProductSectionProps {
 }
 
 const ProductSection = ({ label, title, products, showViewAll }: ProductSectionProps) => {
-  const ITEMS_PER_PAGE = 10; // 2 rows with 5 items each on xl screens
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  // Calculate items per page based on screen size to maintain 2 rows
+  useEffect(() => {
+    const calculateItemsPerPage = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setItemsPerPage(4); // 2 cols × 2 rows = 4 items
+      } else if (width < 1024) {
+        setItemsPerPage(6); // 3 cols × 2 rows = 6 items
+      } else if (width < 1280) {
+        setItemsPerPage(8); // 4 cols × 2 rows = 8 items
+      } else {
+        setItemsPerPage(10); // 5 cols × 2 rows = 10 items
+      }
+    };
+
+    calculateItemsPerPage();
+    window.addEventListener('resize', calculateItemsPerPage);
+    return () => window.removeEventListener('resize', calculateItemsPerPage);
+  }, []);
+
+  // Reset to page 1 when items per page changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [itemsPerPage]);
+
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const currentProducts = products.slice(startIndex, endIndex);
 
   const handlePrevious = () => {
