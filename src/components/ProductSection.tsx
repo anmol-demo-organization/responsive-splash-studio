@@ -64,20 +64,17 @@ const ProductSection = ({ label, title, products, showViewAll }: ProductSectionP
   const handlePrevious = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -137,7 +134,9 @@ const ProductSection = ({ label, title, products, showViewAll }: ProductSectionP
                   <PaginationLink
                     onClick={() => handlePageClick(page)}
                     isActive={currentPage === page}
-                    className="cursor-pointer"
+                    className={currentPage === page 
+                      ? "cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground" 
+                      : "cursor-pointer"}
                   >
                     {page}
                   </PaginationLink>

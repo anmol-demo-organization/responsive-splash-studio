@@ -7,6 +7,7 @@ const FlashSales = () => {
       label="Today's"
       title="Flash Sales"
       products={flashSalesProducts}
+      showViewAll
     />
   );
 };

@@ -7,6 +7,7 @@ const ExploreOurProducts = () => {
       label="Our Products"
       title="Explore Our Products"
       products={exploreProducts}
+      showViewAll
     />
   );
 };
