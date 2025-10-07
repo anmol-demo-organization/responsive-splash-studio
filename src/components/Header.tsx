@@ -45,7 +45,14 @@ const Header = () => {
               >
                 Contact
               </Link>
-              <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">About</a>
+              <Link 
+                to="/about" 
+                className={`hover:text-primary transition-colors border-b-2 pb-1 ${
+                  isActive('/about') ? 'border-primary text-primary' : 'border-transparent'
+                }`}
+              >
+                About
+              </Link>
               <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Sign Up</a>
             </nav>
             
@@ -97,13 +104,15 @@ const Header = () => {
                     >
                       Contact
                     </Link>
-                    <a 
-                      href="#" 
+                    <Link 
+                      to="/about" 
                       onClick={() => setIsOpen(false)}
-                      className="text-lg hover:text-primary transition-colors"
+                      className={`text-lg hover:text-primary transition-colors ${
+                        isActive('/about') ? 'text-primary font-semibold' : ''
+                      }`}
                     >
                       About
-                    </a>
+                    </Link>
                     <a 
                       href="#" 
                       onClick={() => setIsOpen(false)}
