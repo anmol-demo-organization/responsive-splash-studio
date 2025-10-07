@@ -92,11 +92,11 @@ const ProductSection = ({ label, title, products, showViewAll, viewAllLink }: Pr
           <h2 className="text-3xl font-bold">{title}</h2>
           
           <div className="flex items-center gap-2">
-            {showViewAll && viewAllLink && (
+            {showViewAll && (
               <Button 
                 variant="default" 
                 className="bg-primary hover:bg-primary/90"
-                onClick={() => navigate(viewAllLink)}
+                onClick={() => viewAllLink && navigate(viewAllLink)}
               >
                 View All
               </Button>
