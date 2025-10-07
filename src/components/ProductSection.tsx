@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Pagination,
   PaginationContent,
@@ -25,9 +26,11 @@ interface ProductSectionProps {
   title: string;
   products: Product[];
   showViewAll?: boolean;
+  viewAllLink?: string;
 }
 
-const ProductSection = ({ label, title, products, showViewAll }: ProductSectionProps) => {
+const ProductSection = ({ label, title, products, showViewAll, viewAllLink }: ProductSectionProps) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -89,8 +92,12 @@ const ProductSection = ({ label, title, products, showViewAll }: ProductSectionP
           <h2 className="text-3xl font-bold">{title}</h2>
           
           <div className="flex items-center gap-2">
-            {showViewAll && (
-              <Button variant="default" className="bg-primary hover:bg-primary/90">
+            {showViewAll && viewAllLink && (
+              <Button 
+                variant="default" 
+                className="bg-primary hover:bg-primary/90"
+                onClick={() => navigate(viewAllLink)}
+              >
                 View All
               </Button>
             )}

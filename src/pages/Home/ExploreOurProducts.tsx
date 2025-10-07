@@ -8,6 +8,7 @@ const ExploreOurProducts = () => {
       title="Explore Our Products"
       products={exploreProducts}
       showViewAll
+      viewAllLink="/view-all/explore-products"
     />
   );
 };

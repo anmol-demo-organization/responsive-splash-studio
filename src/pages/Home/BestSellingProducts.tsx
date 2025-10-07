@@ -8,6 +8,7 @@ const BestSellingProducts = () => {
       title="Best Selling Products"
       products={bestSellingProducts}
       showViewAll
+      viewAllLink="/view-all/best-selling"
     />
   );
 };

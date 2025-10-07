@@ -8,6 +8,7 @@ const FlashSales = () => {
       title="Flash Sales"
       products={flashSalesProducts}
       showViewAll
+      viewAllLink="/view-all/flash-sales"
     />
   );
 };
