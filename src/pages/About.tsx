@@ -15,7 +15,7 @@ const About = () => {
       icon: DollarSign,
       value: "33k",
       label: "Monthly Product Sale",
-      bgColor: "bg-primary",
+      bgColor: "bg-muted",
     },
     {
       icon: Users,
@@ -33,18 +33,18 @@ const About = () => {
 
   const team = [
     {
-      name: "Tom Cruise",
+      name: "Anand Singh",
       role: "Founder & Chairman",
       image: null,
     },
     {
-      name: "Emma Watson",
-      role: "Managing Director",
+      name: "Anmol Shrivastav",
+      role: "Website Developer",
       image: null,
     },
     {
-      name: "Will Smith",
-      role: "Product Designer",
+      name: "Sandip Bhattacharya",
+      role: "Website Designer",
       image: null,
     },
   ];
@@ -70,10 +70,10 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1">
         {/* Breadcrumb */}
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-2">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Home</span>
             <span>/</span>
