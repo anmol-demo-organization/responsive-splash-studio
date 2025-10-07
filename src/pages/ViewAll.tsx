@@ -1,14 +1,17 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { flashSalesProducts, bestSellingProducts, exploreProducts } from "./Home/constants";
 import ProductCard from "@/components/ProductCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
 
 const ViewAll = () => {
   const { section } = useParams<{ section: string }>();
-  const navigate = useNavigate();
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const getSectionData = () => {
     switch (section) {
@@ -47,15 +50,6 @@ const ViewAll = () => {
       <main className="flex-1">
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <Button
-              variant="outline"
-              onClick={() => navigate("/")}
-              className="mb-6"
-            >
-              <ChevronLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Button>
-
             <div className="flex items-center gap-4 mb-6">
               <div className="w-5 h-10 bg-primary rounded" />
               <span className="text-primary font-semibold">{sectionData.label}</span>
