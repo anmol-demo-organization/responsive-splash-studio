@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Heart, Minus, Plus, Truck, RotateCcw } from "lucide-react";
 import Header from "@/components/Header";
@@ -19,6 +19,11 @@ const ProductDetails = () => {
   if (!product) {
     return <Navigate to="/" replace />;
   }
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.name || "");
