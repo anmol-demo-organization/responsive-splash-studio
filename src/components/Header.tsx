@@ -53,7 +53,14 @@ const Header = () => {
               >
                 About
               </Link>
-              <a href="#" className="hover:text-primary transition-colors border-b-2 border-transparent hover:border-primary pb-1">Sign Up</a>
+              <Link 
+                to="/signup" 
+                className={`hover:text-primary transition-colors border-b-2 pb-1 ${
+                  isActive('/signup') ? 'border-primary text-primary' : 'border-transparent'
+                }`}
+              >
+                Sign Up
+              </Link>
             </nav>
             
             {/* Search and icons */}
@@ -113,13 +120,15 @@ const Header = () => {
                     >
                       About
                     </Link>
-                    <a 
-                      href="#" 
+                    <Link 
+                      to="/signup" 
                       onClick={() => setIsOpen(false)}
-                      className="text-lg hover:text-primary transition-colors"
+                      className={`text-lg hover:text-primary transition-colors ${
+                        isActive('/signup') ? 'text-primary font-semibold' : ''
+                      }`}
                     >
                       Sign Up
-                    </a>
+                    </Link>
                   </nav>
                 </SheetContent>
               </Sheet>
