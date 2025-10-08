@@ -36,11 +36,13 @@ const ProductDetails = () => {
     .filter(p => p.id !== product.id)
     .slice(0, 4);
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to cart!",
-      description: `${quantity} ${product.name} added to your cart.`,
-    });
+  const handleWhatsAppOrder = () => {
+    const productUrl = window.location.href;
+    const colorText = selectedColor ? `\nColor: ${selectedColor}` : '';
+    const sizeText = selectedSize ? `\nSize: ${selectedSize}` : '';
+    const message = `Hi! I want to order:\n\nProduct: ${product.name}\nQuantity: ${quantity}${colorText}${sizeText}\nPrice: $${product.price.toFixed(2)}\n\nProduct Link: ${productUrl}`;
+    const whatsappUrl = `https://wa.me/919643538308?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const handleToggleWishlist = () => {
@@ -170,6 +172,13 @@ const ProductDetails = () => {
                 </div>
               )}
 
+              {/* Payment Notice */}
+              <div className="bg-muted/50 border border-border rounded-lg p-4">
+                <p className="text-sm text-muted-foreground text-center">
+                  🚀 We're working on adding a payment gateway, but no worries! You can place your order via WhatsApp.
+                </p>
+              </div>
+
               {/* Quantity & Actions */}
               <div className="flex flex-wrap items-center gap-4">
                 <div className="flex items-center border rounded">
@@ -187,8 +196,8 @@ const ProductDetails = () => {
                     <Plus className="h-4 w-4" />
                   </button>
                 </div>
-                <Button size="lg" className="flex-1 min-w-[200px]" onClick={handleAddToCart}>
-                  Buy Now
+                <Button size="lg" className="flex-1 min-w-[200px]" onClick={handleWhatsAppOrder}>
+                  Place Order via WhatsApp
                 </Button>
                 <Button
                   size="lg"
